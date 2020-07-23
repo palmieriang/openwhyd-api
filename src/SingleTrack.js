@@ -29,18 +29,16 @@ const SingleTrack = ({ track }) => {
 };
 
 SingleTrack.propTypes = {
-    track: PropTypes.arrayOf(
-        PropTypes.shape({
-            img: PropTypes.string,
+    track: PropTypes.shape({
+        img: PropTypes.string,
+        name: PropTypes.string,
+        pl: PropTypes.shape({
             name: PropTypes.string,
-            pl: PropTypes.shape({
-                name: PropTypes.string,
-            }),
-            src: PropTypes.shape({
-                id: PropTypes.string,
-            }),
-        })
-    ),
+        }),
+        src: PropTypes.shape({
+            id: PropTypes.string,
+        }),
+    })
 };
 
 export default SingleTrack;
