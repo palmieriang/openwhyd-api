@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import Lottie from 'react-lottie';
 import animationData from './animations/7290-music-play.json';
 import './App.scss';
 import SingleTrack from './SingleTrack';
+import GenreDropdown from './GenreDropdown';
 
-const url = `https://openwhyd.org/hot/?format=json`;
-const fetchMedia = () => fetch(url)
+const fetchMedia = (genre) => fetch(`https://openwhyd.org/hot/${genre}?format=json`)
   .then(response => response.json());
 
 const animationOptions = {
@@ -20,20 +20,24 @@ const animationOptions = {
 const App = () => {
   const [list, setList] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [genre, setGenre] = useState('');
 
   useEffect(() => {
-    fetchMedia()
+    fetchMedia(genre)
       .then(data => {
-        // console.info(data);
         setList(data.tracks);
         setIsLoading(false);
       })
       .catch((error) => console.error('Error:', error));
-  }, []);
+  }, [genre]);
+
+  const changeMusicGenre = (event) => {
+    setGenre(event.target.value);
+  };
 
   if(isLoading) {
     return (
-      <div className="AppContainer">
+      <div className="Wrapper">
         <Lottie 
           options={animationOptions}
           height={400}
@@ -44,17 +48,25 @@ const App = () => {
   };
 
   return (
-    <div className="AppContainer">
-      {list.length > 0 ? (
-        list.map(track => {
-          return (
-            <SingleTrack track={track} key={track.trackId} />
-          )
-        })
-      ) : (
-        <p>No media available</p>
-      )}
-    </div>
+    <Fragment>
+      <div className="Header">
+        <div className="Wrapper">
+          <h1>Popular tracks {genre && <span>/ {genre}</span>}</h1>
+          <GenreDropdown changeMusicGenre={changeMusicGenre} />
+        </div>
+      </div>
+      <div className="Wrapper">
+        {list.length > 0 ? (
+          list.map(track => {
+            return (
+              <SingleTrack track={track} key={track.trackId} />
+            )
+          })
+        ) : (
+          <p>No media available</p>
+        )}
+      </div>
+    </Fragment>
   );
 }
 

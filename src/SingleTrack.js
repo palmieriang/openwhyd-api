@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const SingleTrack = ({ track }) => {
-    console.info(track);
     const { img, name, pl, src } = track;
+
     return (
         <div className="TrackContainer">
             <img className="TrackCover" src={img} alt="" />
