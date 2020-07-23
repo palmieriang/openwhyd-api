@@ -1,10 +1,21 @@
 import React, { useState, useEffect } from 'react';
+import Lottie from 'react-lottie';
+import animationData from './animations/7290-music-play.json';
 import './App.scss';
 import SingleTrack from './SingleTrack';
 
 const url = `https://openwhyd.org/hot/?format=json`;
 const fetchMedia = () => fetch(url)
   .then(response => response.json());
+
+const animationOptions = {
+  loop: true,
+  autoplay: true,
+  animationData: animationData,
+  rendererSettings: {
+    preserveAspectRatio: "xMidYMid slice"
+  }
+};
 
 const App = () => {
   const [list, setList] = useState({});
@@ -23,7 +34,11 @@ const App = () => {
   if(isLoading) {
     return (
       <div className="AppContainer">
-        <p>Loading...</p>
+        <Lottie 
+          options={animationOptions}
+          height={400}
+          width={400}
+        />
       </div>
     )
   };
