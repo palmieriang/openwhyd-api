@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const SingleTrack = ({ track }) => {
     console.info(track);
@@ -10,6 +11,7 @@ const SingleTrack = ({ track }) => {
                 <h2>
                     {src ? (
                         <a
+                            className="TrackTitle"
                             href={src.id}
                             target="_blank"
                             rel="noopener noreferrer"
@@ -17,13 +19,28 @@ const SingleTrack = ({ track }) => {
                             {name}
                         </a>
                     ) : (
-                        <p>{name}</p>
+                        <p className="TrackTitle">{name}</p>
                     )}
                 </h2>
                 {pl && <p>{pl.name}</p>}
             </div>
         </div>
     );
+};
+
+SingleTrack.propTypes = {
+    track: PropTypes.arrayOf(
+        PropTypes.shape({
+            img: PropTypes.string,
+            name: PropTypes.string,
+            pl: PropTypes.shape({
+                name: PropTypes.string,
+            }),
+            src: PropTypes.shape({
+                id: PropTypes.string,
+            }),
+        })
+    ),
 };
 
 export default SingleTrack;

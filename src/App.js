@@ -33,7 +33,7 @@ const App = () => {
       {list.length > 0 ? (
         list.map(track => {
           return (
-            <SingleTrack track={track} key={track._id} />
+            <SingleTrack track={track} key={track.trackId} />
           )
         })
       ) : (
