@@ -1,60 +1,3 @@
-.Wrapper {
-  margin: auto;
-  max-width: 1200px;
-}
-
-.Header {
-  background-color: #333;
-
-  .Wrapper {
-    align-items: flex-start;
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    min-height: 80px;
-
-    @media only screen and (min-width: 540px) {
-      align-items: center;
-      flex-direction: row;
-    }
-  }
-
-  h1 {
-    font-size: 25px;
-    margin: 15px;
-  }
-
-  select {
-    margin: 15px;
-  }
-}
-
-.TrackContainer {
-  background-color: #f6f8fa;
-  border-radius: 5px;
-  display: flex;
-  flex-direction: column;
-  margin: 15px 0;
-  padding: 15px;
-
-  @media only screen and (min-width: 540px) {
-    flex-direction: row;
-  }
-}
-
-.TrackCover {
-  height: 150px;
-  margin-right: 20px;
-  width: 150px;
-}
-
-.TrackTitle {
-  color: #063d76;
-  font-size: 20px;
-}
-
 a {
   text-decoration: none;
   color: #063d76;
@@ -114,5 +57,102 @@ select {
 
   &:disabled::-ms-expand {
     background: #f60;
+  }
+}
+
+.Wrapper {
+  margin: auto;
+  max-width: 1200px;
+}
+
+.Header {
+  background-color: #333;
+
+  .Wrapper {
+    align-items: flex-start;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    min-height: 80px;
+
+    @media only screen and (min-width: 540px) {
+      align-items: center;
+      flex-direction: row;
+    }
+  }
+
+  h1 {
+    font-size: 25px;
+    margin: 15px;
+  }
+
+  select {
+    margin: 15px;
+  }
+}
+
+.TrackContainer {
+  background-color: #f6f8fa;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+  padding: 15px;
+
+  @media only screen and (min-width: 540px) {
+    flex-direction: row;
+  }
+}
+
+.TrackCover {
+  height: 150px;
+  margin-right: 20px;
+  width: 150px;
+}
+
+.TrackTitle {
+  color: #063d76;
+  font-size: 20px;
+}
+
+.RankingContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+  max-width: 100px;
+}
+
+.AccessibleIcon {
+  height: 15px;
+  width: 15px;
+  fill: #797979;
+
+  .Text {
+    position:absolute;
+    left:-10000px;
+    top:auto;
+    width:1px;
+    height:1px;
+    overflow:hidden;
+  }
+}
+
+.ArrowDown {
+  transform: rotate(180deg);
+}
+
+.Color {
+  &.ArrowUp {
+    fill: #008000;
+  }
+
+  &.EqualIcon {
+    fill: #000;
+  }
+
+  &.ArrowDown {
+    fill: #ff0000;
   }
 }

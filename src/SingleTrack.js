@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Ranking from './Ranking';
 
 const SingleTrack = ({ track }) => {
-    const { img, name, pl, src } = track;
+    const { img, name, pl, rankIncr, src } = track;
 
     return (
         <div className="TrackContainer">
@@ -23,6 +24,7 @@ const SingleTrack = ({ track }) => {
                     )}
                 </h2>
                 {pl && <p>{pl.name}</p>}
+                <Ranking increment={rankIncr} />
             </div>
         </div>
     );
