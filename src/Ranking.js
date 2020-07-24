@@ -4,7 +4,6 @@ import {ReactComponent as Arrow} from './svg/arrow.svg';
 import {ReactComponent as Equal} from './svg/equal.svg';
 
 const Ranking = ({ increment }) => {
-    console.log(increment);
     return (
         <div className="RankingContainer">
             <div className="AccessibleIcon">
