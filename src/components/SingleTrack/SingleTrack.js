@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Ranking from './components/Ranking/Ranking';
+import Ranking from '../Ranking/Ranking';
+import './SingleTrack.scss';
 
 const SingleTrack = ({ track }) => {
     const { img, name, pl, rankIncr, src } = track;

@@ -2,7 +2,7 @@ import React, { Fragment, useState, useEffect } from 'react';
 import Lottie from 'react-lottie';
 import animationData from './animations/7290-music-play.json';
 import './App.scss';
-import SingleTrack from './SingleTrack';
+import SingleTrack from './components/SingleTrack/SingleTrack';
 import GenreDropdown from './GenreDropdown';
 
 const fetchMedia = (genre) => fetch(`/api/media?genre=${genre}`)
