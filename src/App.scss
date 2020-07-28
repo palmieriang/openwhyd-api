@@ -30,36 +30,6 @@ a {
   }
 }
 
-select {
-  display: block;
-  padding: 10px 70px 10px 13px;
-  max-width: 100%;
-  height: auto;
-  border: 1px solid #e3e3e3;
-  border-radius: 3px;
-  background: url("https://i.ibb.co/b7xjLrB/selectbox-arrow.png") right center no-repeat;
-  background-color: #fff;
-  color: #444444;
-  font-size: 12px;
-  line-height: 16px;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-
-  option {
-    padding: 0 4px;
-  }
-
-  /* for IE and Edge */
-  &::-ms-expand {
-    display: none;
-  }
-
-  &:disabled::-ms-expand {
-    background: #f60;
-  }
-}
-
 .Wrapper {
   margin: auto;
   max-width: 1200px;

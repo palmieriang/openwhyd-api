@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './GenreDropdown.scss';
 
 const musicGenre = [
     { label: 'All', value: '', key: 'all' },
