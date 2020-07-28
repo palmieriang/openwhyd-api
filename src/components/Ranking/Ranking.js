@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {ReactComponent as Arrow} from './svg/arrow.svg';
-import {ReactComponent as Equal} from './svg/equal.svg';
+import {ReactComponent as Arrow} from '../../svg/arrow.svg';
+import {ReactComponent as Equal} from '../../svg/equal.svg';
+import './Ranking.scss';
 
 const Ranking = ({ increment }) => {
     return (
