@@ -25,7 +25,7 @@ const Ranking = ({ increment }) => {
 };
 
 Ranking.propTypes = {
-    img: PropTypes.number,
+    increment: PropTypes.number,
 };
 
 export default Ranking;
