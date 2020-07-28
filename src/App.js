@@ -5,7 +5,7 @@ import './App.scss';
 import SingleTrack from './SingleTrack';
 import GenreDropdown from './GenreDropdown';
 
-const fetchMedia = (genre) => fetch(`https://openwhyd.org/hot/${genre}?format=json`)
+const fetchMedia = (genre) => fetch(`/api/media?genre=${genre}`)
   .then(response => response.json());
 
 const animationOptions = {
