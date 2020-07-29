@@ -1,5 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import Lottie from 'react-lottie';
+import * as qs from 'qs';
 import animationData from './animations/7290-music-play.json';
 import './App.scss';
 import SingleTrack from './components/SingleTrack/SingleTrack';
@@ -18,9 +19,12 @@ const animationOptions = {
 };
 
 const App = () => {
+  const queryString = window.location.search;
+  const parsedQueryString = qs.parse(queryString, { ignoreQueryPrefix: true });
+
   const [list, setList] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const [genre, setGenre] = useState('');
+  const [genre, setGenre] = useState(parsedQueryString.genre || '');
 
   useEffect(() => {
     fetchMedia(genre)
@@ -34,8 +38,16 @@ const App = () => {
       });
   }, [genre]);
 
+  const updateQueryString = (genre) => {
+    const params = new URLSearchParams(window.location.search);
+
+    params.set('genre', genre);
+    window.history.replaceState({}, '', `${window.location.pathname}?${params}`)
+  };
+
   const changeMusicGenre = (event) => {
     setGenre(event.target.value);
+    updateQueryString(event.target.value);
   };
 
   if(isLoading) {
@@ -55,7 +67,7 @@ const App = () => {
       <div className="Header">
         <div className="Wrapper">
           <h1>Popular tracks {genre && <span>/ {genre}</span>}</h1>
-          <GenreDropdown changeMusicGenre={changeMusicGenre} />
+          <GenreDropdown changeMusicGenre={changeMusicGenre} initialGenre={genre} />
         </div>
       </div>
       <div className="Wrapper">

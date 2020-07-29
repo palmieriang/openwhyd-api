@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './GenreDropdown.scss';
 
 const musicGenre = [
-    { label: 'All', value: '', key: 'all' },
+    { label: 'All', value: 'all', key: 'all' },
     { label: 'Blues', value: 'blues', key: 'blues' },
     { label: 'Electro', value: 'electro', key: 'electro' },
     { label: 'Folk', value: 'folk', key: 'folk' },
@@ -17,10 +17,12 @@ const musicGenre = [
     { label: 'Soul', value: 'soul', key: 'soul' },
 ];
 
-const GenreDropdown = ({ changeMusicGenre }) => {
+const GenreDropdown = ({ changeMusicGenre, initialGenre }) => {
+
     return (
         <select
             onChange={changeMusicGenre}
+            value={initialGenre}
         >
             {
                 musicGenre.map(({key, value, label}) => <option key={key} value={value}>{label}</option>)
