@@ -28,7 +28,10 @@ const App = () => {
         setList(data.tracks);
         setIsLoading(false);
       })
-      .catch((error) => console.error('Error:', error));
+      .catch((error) => {
+        console.error('Error:', error);
+        setIsLoading(false);
+      });
   }, [genre]);
 
   const changeMusicGenre = (event) => {
