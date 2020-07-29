@@ -33,6 +33,7 @@ const GenreDropdown = ({ changeMusicGenre, initialGenre }) => {
 
 GenreDropdown.propTypes = {
     changeMusicGenre: PropTypes.func,
+    initialGenre: PropTypes.string,
 };
 
 export default GenreDropdown;
