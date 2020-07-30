@@ -6,7 +6,7 @@ import './App.scss';
 import SingleTrack from './components/SingleTrack/SingleTrack';
 import GenreDropdown from './components/GenreDropdown/GenreDropdown';
 
-const fetchMedia = (genre) => fetch(`/api/media?genre=${genre}`)
+const fetchMedia = (genre, loadMore) => fetch(`/api/media?genre=${genre}&skip=${loadMore}`)
   .then(response => response.json());
 
 const animationOptions = {
@@ -22,12 +22,12 @@ const App = () => {
   const queryString = window.location.search;
   const parsedQueryString = qs.parse(queryString, { ignoreQueryPrefix: true });
 
-  const [list, setList] = useState({});
+  const [list, setList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [genre, setGenre] = useState(parsedQueryString.genre || '');
 
   useEffect(() => {
-    fetchMedia(genre)
+    fetchMedia(genre, 0)
       .then(data => {
         setList(data.tracks);
         setIsLoading(false);
@@ -50,6 +50,20 @@ const App = () => {
     updateQueryString(event.target.value);
   };
 
+  const pagination = () => {
+    const skipItems = list.length;
+
+    fetchMedia(genre, skipItems)
+      .then(data => {
+        const newTracks = data.tracks;
+        const newList = [ ...list , ...newTracks];
+        setList(newList);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  };
+
   if(isLoading) {
     return (
       <div className="Wrapper">
@@ -70,16 +84,21 @@ const App = () => {
           <GenreDropdown changeMusicGenre={changeMusicGenre} initialGenre={genre} />
         </div>
       </div>
-      <div className="Wrapper">
-        {list.length > 0 ? (
-          list.map(track => {
-            return (
-              <SingleTrack track={track} key={track.trackId} />
-            )
-          })
-        ) : (
-          <p>No media available</p>
-        )}
+      <div className="Main">
+        <div className="Wrapper">
+          {list.length > 0 ? (
+            list.map(track => {
+              return (
+                <SingleTrack track={track} key={track.trackId} />
+              )
+            })
+          ) : (
+            <p>No media available</p>
+          )}
+        </div>
+        <div className="Wrapper">
+            <button className="LoadMore" onClick={pagination}>Load more</button>
+        </div>
       </div>
     </Fragment>
   );
