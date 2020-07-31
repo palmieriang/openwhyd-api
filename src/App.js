@@ -1,13 +1,10 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useState, useEffect, useCallback } from 'react';
 import Lottie from 'react-lottie';
 import * as qs from 'qs';
 import animationData from './animations/7290-music-play.json';
 import './App.scss';
 import SingleTrack from './components/SingleTrack/SingleTrack';
 import GenreDropdown from './components/GenreDropdown/GenreDropdown';
-
-const fetchMedia = (genre, loadMore) => fetch(`/api/media?genre=${genre}&skip=${loadMore}`)
-  .then(response => response.json());
 
 const animationOptions = {
   loop: true,
@@ -25,18 +22,26 @@ const App = () => {
   const [list, setList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [genre, setGenre] = useState(parsedQueryString.genre || '');
+  const [skip, setSkip] = useState(0);
 
   useEffect(() => {
-    fetchMedia(genre, 0)
-      .then(data => {
-        setList(data.tracks);
+    fetch(`/api/media?genre=${genre}&skip=${skip}`)
+      .then(response => response.json()).then(data => {
+        const newTracks = data.tracks;
+        const newList = [ ...list , ...newTracks];
+        setList(newList);
+
         setIsLoading(false);
       })
       .catch((error) => {
         console.error('Error:', error);
         setIsLoading(false);
       });
-  }, [genre]);
+  }, [genre, skip])
+
+  const handlePaginationClick = useCallback(() => {
+    setSkip(skip + 20);
+  }, [skip]);
 
   const updateQueryString = (genre) => {
     const params = new URLSearchParams(window.location.search);
@@ -48,20 +53,6 @@ const App = () => {
   const changeMusicGenre = (event) => {
     setGenre(event.target.value);
     updateQueryString(event.target.value);
-  };
-
-  const pagination = () => {
-    const skipItems = list.length;
-
-    fetchMedia(genre, skipItems)
-      .then(data => {
-        const newTracks = data.tracks;
-        const newList = [ ...list , ...newTracks];
-        setList(newList);
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
   };
 
   if(isLoading) {
@@ -97,7 +88,7 @@ const App = () => {
           )}
         </div>
         <div className="Wrapper">
-            <button className="LoadMore" onClick={pagination}>Load more</button>
+            <button className="LoadMore" onClick={handlePaginationClick}>Load more</button>
         </div>
       </div>
     </Fragment>
