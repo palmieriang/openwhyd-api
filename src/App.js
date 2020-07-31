@@ -26,11 +26,10 @@ const App = () => {
 
   useEffect(() => {
     fetch(`/api/media?genre=${genre}&skip=${skip}`)
-      .then(response => response.json()).then(data => {
-        const newTracks = data.tracks;
-        const newList = [ ...list , ...newTracks];
-        setList(newList);
-
+      .then(response => response.json())
+      .then(data => {
+        setList([ ...list , ...data.tracks]);
+    
         setIsLoading(false);
       })
       .catch((error) => {
