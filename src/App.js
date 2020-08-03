@@ -5,6 +5,7 @@ import animationData from './animations/7290-music-play.json';
 import './App.scss';
 import SingleTrack from './components/SingleTrack/SingleTrack';
 import GenreDropdown from './components/GenreDropdown/GenreDropdown';
+import Player from './components/Player/Player';
 
 const animationOptions = {
   loop: true,
@@ -23,6 +24,7 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [genre, setGenre] = useState(parsedQueryString.genre || '');
   const [skip, setSkip] = useState(0);
+  const [currentSong, setCurrentSong] = useState('');
 
   useEffect(() => {
     fetch(`/api/media?genre=${genre}&skip=${skip}`)
@@ -54,6 +56,11 @@ const App = () => {
     updateQueryString(event.target.value);
   };
 
+  const handlePlayer = (event) => {
+    event.preventDefault();
+    setCurrentSong(event.target.href);
+  };
+
   if(isLoading) {
     return (
       <div className="Wrapper">
@@ -79,7 +86,7 @@ const App = () => {
           {list.length > 0 ? (
             list.map(track => {
               return (
-                <SingleTrack track={track} key={track.trackId} />
+                <SingleTrack track={track} key={track.trackId} handlePlayer={handlePlayer} />
               )
             })
           ) : (
@@ -87,9 +94,10 @@ const App = () => {
           )}
         </div>
         <div className="Wrapper">
-            <button className="LoadMore" onClick={handlePaginationClick}>Load more</button>
+          <button className="LoadMore" onClick={handlePaginationClick}>Load more</button>
         </div>
       </div>
+      <Player currentSong={currentSong} />
     </Fragment>
   );
 }

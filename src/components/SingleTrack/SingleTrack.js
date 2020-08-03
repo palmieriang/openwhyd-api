@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Ranking from '../Ranking/Ranking';
 import './SingleTrack.scss';
 
-const SingleTrack = ({ track }) => {
+const SingleTrack = ({ track, handlePlayer }) => {
     const { img, name, pl, rankIncr, src } = track;
 
     return (
@@ -17,6 +17,7 @@ const SingleTrack = ({ track }) => {
                             href={src.id}
                             target="_blank"
                             rel="noopener noreferrer"
+                            onClick={handlePlayer}
                         >
                             {name}
                         </a>
