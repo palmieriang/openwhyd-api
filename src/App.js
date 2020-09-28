@@ -6,6 +6,7 @@ import './App.scss';
 import SingleTrack from './components/SingleTrack/SingleTrack';
 import GenreDropdown from './components/GenreDropdown/GenreDropdown';
 import Player from './components/Player/Player';
+import { fetchMedia } from './utils/api';
 
 const animationOptions = {
   loop: true,
@@ -27,11 +28,9 @@ const App = () => {
   const [currentSong, setCurrentSong] = useState('');
 
   useEffect(() => {
-    fetch(`/api/media?genre=${genre}&skip=${skip}`)
-      .then(response => response.json())
+    fetchMedia(genre, skip)
       .then(data => {
         setList([ ...list , ...data.tracks]);
-    
         setIsLoading(false);
       })
       .catch((error) => {
