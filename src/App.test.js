@@ -17,8 +17,8 @@ const data = {
       },
       rankIncr: 0,
       src: {
-        id: 'https://www.youtube.com/watch?v=55ak4ubAbIY&list=RD55ak4ubAbIY&start_radio=1&t=43'
-      } 
+        id: 'https://www.youtube.com/watch?v=55ak4ubAbIY&list=RD55ak4ubAbIY&start_radio=1&t=43',
+      }
     }
   ]
 };
@@ -34,8 +34,8 @@ const data2 = {
       },
       rankIncr: 0,
       src: {
-        id: 'https://www.youtube.com/watch?v=YF1R0hc5Q2I&list=PLmXxqSJJq-yXrCPGIT2gn8b34JjOrl4Xf&index=20'
-      } 
+        id: 'https://www.youtube.com/watch?v=YF1R0hc5Q2I&list=PLmXxqSJJq-yXrCPGIT2gn8b34JjOrl4Xf&index=20',
+      }
     }
   ]
 };
