@@ -37,7 +37,7 @@ const App = () => {
         console.error('Error:', error);
         setIsLoading(false);
       });
-  }, [genre, skip])
+  }, [genre, skip]);
 
   const handlePaginationClick = useCallback(() => {
     setSkip(skip + 20);
@@ -52,6 +52,8 @@ const App = () => {
 
   const changeMusicGenre = (event) => {
     setGenre(event.target.value);
+    setIsLoading(true);
+    setList([]);
     updateQueryString(event.target.value);
   };
 
@@ -63,7 +65,7 @@ const App = () => {
   if(isLoading) {
     return (
       <div className="Wrapper">
-        <Lottie 
+        <Lottie
           options={animationOptions}
           height={400}
           width={400}
