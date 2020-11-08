@@ -45,12 +45,12 @@ describe('App', () => {
     fetchMedia.mockClear();
   })
 
-  it('should fetch the media list', () => {
+  it('should fetch the media list', async () => {
     fetchMedia.mockResolvedValueOnce(data);
 
     render(<App />);
 
-    expect(fetchMedia).toHaveBeenCalled();
+    await waitFor(() => expect(fetchMedia).toHaveBeenCalled());
   });
 
   it('should show more results when user clicks on load more', async () => {
