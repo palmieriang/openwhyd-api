@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // app.use(pino);
 
 app.get('/api/media', async (req, res) => {
-  const response = await axios(`https://openwhyd.org/hot/?${req.query.genre}&skip=${req.query.skip}&format=json`)
+  const response = await axios(`https://openwhyd.org/hot/?genre=${req.query.genre}&skip=${req.query.skip}&format=json`)
 
   res.setHeader('Content-Type', 'application/json');
   res.send(JSON.stringify(response.data));

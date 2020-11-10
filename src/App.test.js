@@ -45,6 +45,14 @@ describe('App', () => {
     fetchMedia.mockClear();
   })
 
+  it('should show loading state while fetching the media list', async () => {
+    fetchMedia.mockResolvedValueOnce(data);
+
+    const { getByLabelText } = render(<App />);
+
+    await waitFor(() => expect(getByLabelText(/animation/i)).toBeInTheDocument());
+  });
+
   it('should fetch the media list', async () => {
     fetchMedia.mockResolvedValueOnce(data);
 
